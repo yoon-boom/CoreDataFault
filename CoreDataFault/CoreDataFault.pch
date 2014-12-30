@@ -1,0 +1,9 @@
+//
+//  CoreDataFault.pch
+//  CoreDataFault
+//
+//  Created by Yoon Lee on 12/29/14.
+//  Copyright (c) 2014 Yoon Lee. All rights reserved.
+//
+
+#define RGB(red, gree, blue)                [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1]
