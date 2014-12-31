@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="v1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14B25" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Car" representedClassName="Car" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="make" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="details" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CarDetail" inverseName="info" inverseEntity="CarDetail" syncable="YES"/>
+    </entity>
+    <entity name="CarDetail" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="info" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Car" inverseName="details" inverseEntity="Car" syncable="YES"/>
+    </entity>
     <entity name="Country" representedClassName="Country" syncable="YES">
         <attribute name="nameOfCountry" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="person" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="countries" inverseEntity="Person" syncable="YES"/>
@@ -14,7 +24,9 @@
         <relationship name="countries" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Country" inverseName="person" inverseEntity="Country" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Person" positionX="-2871" positionY="-981" width="128" height="148"/>
         <element name="Country" positionX="-2844" positionY="-909" width="128" height="73"/>
+        <element name="Person" positionX="-2871" positionY="-981" width="128" height="150"/>
+        <element name="Car" positionX="-3330" positionY="-981" width="128" height="103"/>
+        <element name="CarDetail" positionX="-3044" positionY="-937" width="128" height="73"/>
     </elements>
 </model>

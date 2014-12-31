@@ -16,9 +16,16 @@
 // saves changes in the application's managed object context before the application terminates.
 - (void)saveContext;
 
-// operation
-- (NSArray *)searchForEntity:(NSString *)entityName withPredicateStr:(NSString *)predicateStr;
-- (NSArray *)searchForEntity:(NSString *)entityName withRelationshipKeys:(NSArray *)relationKeys withPredicateStr:(NSString *)predicateStr;
+// add new record
+- (void)newRecordWithEntity:(NSString *)entityName setValues:(NSArray *)values forKeys:(NSArray *)keys;
+
+// fetch record(s)
+- (NSArray *)searchRecordWithEntity:(NSString *)entityName forPredicateStr:(NSString *)predicateStr;
+- (NSArray *)searchRecordWithEntity:(NSString *)entityName forRelationshipKeys:(NSArray *)relationKeys
+                    forPredicateStr:(NSString *)predicateStr;
+
+// delete record(s)
+- (void)flushRecords:(void (^) (BOOL succeed))block;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;

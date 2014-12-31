@@ -30,29 +30,38 @@
     
     dispatch_once(&token, ^{
         // print directory
-        NSLog(@"%@", NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]);
+        DLog(@"%@", NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]);
         // create singleton variable
         sharedCoreDataManager = [[CoreDataManager alloc] init];
-        // load it once to configure Core Data
-        [sharedCoreDataManager managedObjectContext];
     });
+    
+    // load it once to configure Core Data
+    [sharedCoreDataManager managedObjectContext];
     
     return sharedCoreDataManager;
 }
 
-- (NSArray *)searchForEntity:(NSString *)entityName withPredicateStr:(NSString *)predicateStr
+- (void)newRecordWithEntity:(NSString *)entityName setValues:(NSArray *)values forKeys:(NSArray *)keys
+{
+    NSManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName:entityName
+                                                                   inManagedObjectContext:self.managedObjectContext];
+    
+    // insert
+    [values enumerateObjectsUsingBlock:^(id value, NSUInteger idx, BOOL *stop) {
+        [managedObject setValue:value forKey:keys[idx]];
+    }];
+}
+
+- (NSArray *)searchRecordWithEntity:(NSString *)entityName forPredicateStr:(NSString *)predicateStr
 {
     NSArray *result = nil;
-    NSError *err = nil;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entityDesc];
-    result = [self.managedObjectContext executeFetchRequest:fetchRequest error:&err];
+    result = [self searchRecordWithEntity:entityName forRelationshipKeys:@[] forPredicateStr:predicateStr];
     
     return result;
 }
 
-- (NSArray *)searchForEntity:(NSString *)entityName withRelationshipKeys:(NSArray *)relationKeys withPredicateStr:(NSString *)predicateStr
+- (NSArray *)searchRecordWithEntity:(NSString *)entityName forRelationshipKeys:(NSArray *)relationKeys
+                    forPredicateStr:(NSString *)predicateStr
 {
     NSArray *result = nil;
     NSError *err = nil;
@@ -141,6 +150,38 @@
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
+    }
+}
+
+- (void)flushRecords:(void (^) (BOOL succeed))block
+{
+    // lock
+    [self.managedObjectContext lock];
+
+    NSArray *stores = [self.persistentStoreCoordinator persistentStores];
+    [stores enumerateObjectsUsingBlock:^(NSPersistentStore *store, NSUInteger idx, BOOL *stop) {
+        NSError *err = nil;
+        [self.persistentStoreCoordinator removePersistentStore:store error:&err];
+        if (block) {
+            block(NO);
+        }
+        [[NSFileManager defaultManager] removeItemAtPath:store.URL.path error:&err];
+        
+        if (block) {
+            block(NO);
+        }
+        
+    }];
+    
+    // unlock
+    [self.managedObjectContext unlock];
+    
+    _managedObjectModel = nil;
+    _managedObjectContext = nil;
+    _persistentStoreCoordinator = nil;
+    
+    if (block) {
+        block(YES);
     }
 }
 
