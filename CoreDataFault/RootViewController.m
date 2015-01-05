@@ -16,6 +16,11 @@
 {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+    [[CoreDataManager sharedCoreDataManager] flushRecords:^(BOOL succeed) {
+        NSLog(@".flushed");
+    }];
+    
     NSMutableArray *storage = [[NSMutableArray alloc] init];
     
     // insert
@@ -32,9 +37,6 @@
     
     [result enumerateObjectsUsingBlock:^(Person *person, NSUInteger idx, BOOL *stop) {
         NSLog(@"%@", person);
-        if (person.isFault) {
-            NSLog(@".faulting first attempt");
-        }
         
         [storage addObject:person];
     }];
@@ -44,24 +46,6 @@
         NSLog(@"%@", person);
         NSLog(@"%@", person.name);
         NSLog(@"%@", person);
-        
-        if (person.isFault) {
-            NSLog(@".faulting");
-        }
-        else {
-            NSLog(@"%@", person);
-        }
-    }];
-    
-    result = [[CoreDataManager sharedCoreDataManager] searchRecordWithEntity:@"Car" forPredicateStr:nil];
-    
-    [result enumerateObjectsUsingBlock:^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
-        if (obj.isFault) {
-            NSLog(@".faulting");
-        }
-        else {
-            NSLog(@"%@", obj);
-        }
     }];
 }
 

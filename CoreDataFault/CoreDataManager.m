@@ -136,6 +136,7 @@
     }
     _managedObjectContext = [[NSManagedObjectContext alloc] init];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+    
     return _managedObjectContext;
 }
 
@@ -162,15 +163,14 @@
     [stores enumerateObjectsUsingBlock:^(NSPersistentStore *store, NSUInteger idx, BOOL *stop) {
         NSError *err = nil;
         [self.persistentStoreCoordinator removePersistentStore:store error:&err];
-        if (block) {
+        if (err && block) {
             block(NO);
         }
         [[NSFileManager defaultManager] removeItemAtPath:store.URL.path error:&err];
         
-        if (block) {
+        if (err && block) {
             block(NO);
         }
-        
     }];
     
     // unlock

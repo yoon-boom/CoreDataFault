@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		6B1CD0281A5252BA00FA292B /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1CD0271A5252BA00FA292B /* Country.m */; };
 		6B1CD02B1A5252BB00FA292B /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1CD02A1A5252BB00FA292B /* Person.m */; };
+		6B41219E1A537DD0009C74EB /* CarDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B41219D1A537DD0009C74EB /* CarDetail.m */; };
+		6B4121A11A537DD2009C74EB /* Car.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4121A01A537DD2009C74EB /* Car.m */; };
+		6B4121A41A537F5F009C74EB /* CarTune.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4121A31A537F5F009C74EB /* CarTune.m */; };
 		6B7301C11A5225800083F71A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7301C01A5225800083F71A /* main.m */; };
 		6B7301C41A5225800083F71A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7301C31A5225800083F71A /* AppDelegate.m */; };
 		6B7301C71A5225800083F71A /* CoreDataFault.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B7301C51A5225800083F71A /* CoreDataFault.xcdatamodeld */; };
@@ -24,6 +27,12 @@
 		6B1CD0271A5252BA00FA292B /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
 		6B1CD0291A5252BB00FA292B /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		6B1CD02A1A5252BB00FA292B /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		6B41219C1A537DD0009C74EB /* CarDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarDetail.h; sourceTree = "<group>"; };
+		6B41219D1A537DD0009C74EB /* CarDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarDetail.m; sourceTree = "<group>"; };
+		6B41219F1A537DD2009C74EB /* Car.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Car.h; sourceTree = "<group>"; };
+		6B4121A01A537DD2009C74EB /* Car.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Car.m; sourceTree = "<group>"; };
+		6B4121A21A537F5F009C74EB /* CarTune.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarTune.h; sourceTree = "<group>"; };
+		6B4121A31A537F5F009C74EB /* CarTune.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarTune.m; sourceTree = "<group>"; };
 		6B7301BB1A5225800083F71A /* CoreDataFault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataFault.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B7301BF1A5225800083F71A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B7301C01A5225800083F71A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -118,6 +127,10 @@
 			isa = PBXGroup;
 			children = (
 				6B7301F61A5233AD0083F71A /* Subclass */,
+				6B41219F1A537DD2009C74EB /* Car.h */,
+				6B4121A01A537DD2009C74EB /* Car.m */,
+				6B41219C1A537DD0009C74EB /* CarDetail.h */,
+				6B41219D1A537DD0009C74EB /* CarDetail.m */,
 				6B1CD0291A5252BB00FA292B /* Person.h */,
 				6B1CD02A1A5252BB00FA292B /* Person.m */,
 				6B1CD0261A5252BA00FA292B /* Country.h */,
@@ -138,6 +151,8 @@
 		6B7301F61A5233AD0083F71A /* Subclass */ = {
 			isa = PBXGroup;
 			children = (
+				6B4121A21A537F5F009C74EB /* CarTune.h */,
+				6B4121A31A537F5F009C74EB /* CarTune.m */,
 			);
 			name = Subclass;
 			sourceTree = "<group>";
@@ -211,13 +226,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B4121A11A537DD2009C74EB /* Car.m in Sources */,
 				6B7301C41A5225800083F71A /* AppDelegate.m in Sources */,
+				6B4121A41A537F5F009C74EB /* CarTune.m in Sources */,
 				6B7301C11A5225800083F71A /* main.m in Sources */,
 				6B1CD02B1A5252BB00FA292B /* Person.m in Sources */,
 				6B7301F11A522A390083F71A /* RootViewController.m in Sources */,
 				6B7301EB1A5226270083F71A /* CoreDataManager.m in Sources */,
 				6B1CD0281A5252BA00FA292B /* Country.m in Sources */,
 				6B7301C71A5225800083F71A /* CoreDataFault.xcdatamodeld in Sources */,
+				6B41219E1A537DD0009C74EB /* CarDetail.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
